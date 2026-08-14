@@ -7,27 +7,9 @@
 
 最近在准备一个封闭式的比赛，查到往年的器件有这个高精度的delta-sigma ADC芯片，很适合做一些直流测量，把这个芯片买了试了一试，记录一下
 
+**相关代码**: https://github.com/Kreeli/ADS112C04_Sn-s-resistance-measure
+
 ![](pic/functional_diagram.png)
-
-## 工程信息
-
-- **芯片**: TI ADS112C04 (16-bit, 4通道, 2kSPS, Δ-Σ ADC, I2C 接口)
-- **主控**: TI MSPM0G3507 (Cortex-M0+)
-- **工具链**: Keil MDK (uVision) + ARM Compiler V6 (armclang)
-- **配置工具**: TI SysConfig（工程根目录的 `01_template_project.syscfg`，可重新生成 `ti_msp_dl_config.c/h`）
-- **目录结构**:
-  - `Core/` - 用户代码（main.c、ADS112C.c/h 驱动、board.c/h）
-  - `Driver/` - TI MSPM0 DriverLib 库（不要手动改）
-  - `keil/` - Keil 工程文件（.uvprojx），编译产物在 Objects/ 和 Listings/
-  - `pic/` - 文档配图
-- **数据手册**: 仓库内附 TI-ADS112C04.pdf（中文版 ZHCSI06A）
-- **许可证**: 未指定，如需开源请自行添加 LICENSE
-
-## 编译说明
-
-1. 用 TI SysConfig 打开 `01_template_project.syscfg` 生成外设初始化代码（I2C_0 400kHz、UART_PC）
-2. 用 Keil uVision 打开 `keil/01_template_project.uvprojx`，选择 ARM Compiler V6
-3. 编译下载即可，默认配置为 ADS112C04 连续采样（AIN0 单端、增益1、660SPS）
 
 # Driverlib的I2C读写基本函数
 
@@ -504,3 +486,7 @@ ADS112C_configPGA(true, ADS112C_CFG0_GAIN_128);
 这个芯片的turbo模式下，采样率更高，对噪声的抑制效果更好
 
 这个芯片我感兴趣的功能就这么多了，希望能给看到这篇文章的读者起到帮助!
+
+---
+
+**完整工程代码**: https://github.com/Kreeli/ADS112C04_Sn-s-resistance-measure
